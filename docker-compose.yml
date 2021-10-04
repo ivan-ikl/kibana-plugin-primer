@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+
+  kibana-dev-env:
+      image: ivan-ikl/kibana-dev-env:latest
+
+      hostname: "kibana-dev-env"
+      container_name: "kibana-dev-env"
+      volumes:
+          - ./plugins:/usr/share/kibana/plugins
+      networks:
+          - internal-net
+      ports:
+          - "127.0.0.1:5601:5601"
+
+  elasticsearch-dev-env:
+      image: docker.elastic.co/elasticsearch/elasticsearch:7.13.3
+      hostname: "elasticsearch-dev-env"
+      container_name: "elasticsearch-dev-env"
+      volumes:
+          - ./storage/elasticsearch:/usr/share/elasticsearch/data
+      networks:
+          - internal-net
+      environment:
+          - discovery.type=single-node
+          - bootstrap.memory_lock=true
+          - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+      healthcheck:
+          test: ["CMD", "curl", "-f", "http://localhost:9200"]
+          interval: 30s
+          timeout: 30s
+          retries: 5
+      restart: unless-stopped
+
+networks:
+    internal-net:
+        driver: bridge
