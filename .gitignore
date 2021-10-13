@@ -1,0 +1,5 @@
+storage/elasticsearch/*
+plugins/*
+
+!storage/elasticsearch/.gitkeep
+!plugins/.gitkeep
