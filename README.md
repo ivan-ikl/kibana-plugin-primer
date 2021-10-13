@@ -19,3 +19,5 @@ Connecting to the environment:
 ```console
 $ docker-compose exec kibana-dev-env bash
 ```
+
+Finally, ensure that the user kibana in the kibana-dev-env container has ownership of the plugins directory, as lack of it could cause errors during plugin development.
