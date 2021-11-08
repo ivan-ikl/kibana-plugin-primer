@@ -25,8 +25,9 @@ docker-compose exec kibana-dev-env bash -c "
     cd plugins/$1/ &&
     yarn kbn bootstrap > /usr/share/kibana-logs/yarn-bootstrap-$1.log &&
     echo 7 | yarn plugin-helpers build > /usr/share/kibana-logs/yarn-build-$1.log"
+error_code=$?
 
-if [ "$retVal" == "1" ]; then
+if [ "$error_code" != "0" ]; then
     echo "Plugin build failed!"
     echo -e "\n*** Yarn kbn bootstrap log ***"
     cat "kibana-logs/yarn-bootstrap-$1.log"
