@@ -1,5 +1,9 @@
 storage/elasticsearch/*
 plugins/*
+src
+tsconfig.*
+package.json
+TYPESCRIPT.md
 
 !storage/elasticsearch/.gitkeep
 !plugins/.gitkeep
