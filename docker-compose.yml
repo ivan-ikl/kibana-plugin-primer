@@ -9,6 +9,8 @@ services:
       container_name: "kibana-dev-env"
       volumes:
           - ./plugins:/usr/share/kibana/plugins
+          - ./staging:/usr/share/staging
+          - ./kibana-logs:/usr/share/kibana-logs
       networks:
           - internal-net
       ports:
@@ -32,6 +34,8 @@ services:
           timeout: 30s
           retries: 5
       restart: unless-stopped
+      ports:
+          - "127.0.0.1:9200:9200"
 
 networks:
     internal-net:
