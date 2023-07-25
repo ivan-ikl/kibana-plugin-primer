@@ -1,6 +1,6 @@
 # kibana-plugin-primer
 
-This repository contains resources that set up a Kibana 7.13 plugin development environment. The environment includes a Docker image with Kibana, and starts an Elasticsearch instance using docker-compose. Docker image is built seperately from docker-compose to enable its usage in other scenarios.
+This repository contains resources that set up a Kibana 8.6.0 plugin development environment. The environment includes a Docker image with Kibana, and starts an Elasticsearch instance using docker-compose. Docker image is built seperately from docker-compose to enable its usage in other scenarios.
 
 Plugins can be developed inside the plugins folder, that gets mapped inside the Kibana Docker container. For additional information regarding plugin development, please visit [Kibana Plugin Resources](https://www.elastic.co/guide/en/kibana/current/development-plugin-resources.html)
 

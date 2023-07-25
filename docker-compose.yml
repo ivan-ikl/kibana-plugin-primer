@@ -4,7 +4,9 @@ services:
 
   kibana-dev-env:
       image: ivan-ikl/kibana-dev-env:latest
-
+      build:
+        context: node-docker/
+        dockerfile: Dockerfile
       hostname: "kibana-dev-env"
       container_name: "kibana-dev-env"
       volumes:
@@ -17,7 +19,8 @@ services:
           - "127.0.0.1:5601:5601"
 
   elasticsearch-dev-env:
-      image: docker.elastic.co/elasticsearch/elasticsearch:7.13.3
+      image: docker.elastic.co/elasticsearch/elasticsearch:8.6.0
+      #image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0 # Must upgrade first to 7.17.0, and only then to 8.6.0
       hostname: "elasticsearch-dev-env"
       container_name: "elasticsearch-dev-env"
       volumes:
@@ -27,13 +30,14 @@ services:
       environment:
           - discovery.type=single-node
           - bootstrap.memory_lock=true
-          - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+          - xpack.security.enabled=false
+          - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       healthcheck:
           test: ["CMD", "curl", "-f", "http://localhost:9200"]
           interval: 30s
           timeout: 30s
           retries: 5
-      restart: unless-stopped
+      #restart: unless-stopped
       ports:
           - "127.0.0.1:9200:9200"
 
